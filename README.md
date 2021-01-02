@@ -32,5 +32,4 @@ Token used for authenticated Krane requests
 
 Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration)
 
-- required: `false`
-- default: `./deployment.json`
+- required: `true`
