@@ -7,7 +7,7 @@ The Krane Github Action allows you to automate deployments using [Krane](https:/
 Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step ideally _auto-deploying_ your apps in that same pipeline.
 
 ```yml
-uses: actions/krane@v1
+uses: krane/action@v1
 with:
   url: ${{ secrets.KRANE_URL }}
   token: ${{ secrets.KRANE_TOKEN }}
