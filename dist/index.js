@@ -401,7 +401,8 @@ exports.toCommandValue = toCommandValue;
 const { promises: fs } = __webpack_require__(747);
 
 const resolveConfig = async (path) => {
-  return await fs.readFile(path, "utf8");
+  const rawConfig = await fs.readFile(path, "utf8");
+  return JSON.parse(rawConfig);
 };
 
 module.exports = { resolveConfig };
@@ -412,17 +413,22 @@ module.exports = { resolveConfig };
 /***/ 877:
 /***/ ((module) => {
 
-const runDeployment = async (baseUrl, token, config) => {
-  return await fetch(`${baseUrl}/deployment`, {
+const saveDeployment = async (baseUrl, token, config) => {
+  return await fetch(`${baseUrl}/deployments`, {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
+    headers: { Authorization: `Bearer ${token}` },
     body: JSON.stringify(config),
   });
 };
 
-module.exports = { runDeployment };
+const runDeployment = async (baseUrl, token, deployment) => {
+  return await fetch(`${baseUrl}/deployments/${deployment}`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+};
+
+module.exports = { saveDeployment, runDeployment };
 
 
 /***/ }),
@@ -432,17 +438,27 @@ module.exports = { runDeployment };
 
 const core = __webpack_require__(186);
 
-const { runDeployment } = __webpack_require__(877);
+const { saveDeployment, runDeployment } = __webpack_require__(877);
 const { resolveConfig } = __webpack_require__(570);
 
 const main = async () => {
   const url = core.getInput("url");
   const token = core.getInput("token");
-  const config = resolveConfig(core.getInput("configPath"));
+  const config = resolveConfig(core.getInput("file"));
 
-  const response = await runDeployment(url, token, config);
-  if (response.status != 202) {
-    throw new Error(`Deployment was not accepted, ${response.Error}`);
+  // save the deployment configuration
+  const saveRes = await saveDeployment(url, token, config);
+  if (!saveRes.ok) {
+    throw new Error(
+      `Unable to save deployment configuration, ${response.Error}`
+    );
+  }
+
+  // run the deployment re-creating any container resources
+  const deployment = config["name"];
+  const runRes = await runDeployment(url, token, deployment);
+  if (runRes.status != 202) {
+    throw new Error(`Unable to run deployment, ${response.Error}`);
   }
 };
 
