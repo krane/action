@@ -44,7 +44,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: davidcasta/docker-to-node
+          repository: my-repo/my-image
           tags: latest
   deploy-to-krane:
     name: Deploy to Krane
