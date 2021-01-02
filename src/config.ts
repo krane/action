@@ -1,5 +1,5 @@
-import { Config } from "@krane/common";
 import { promises } from "fs";
+import { Config } from "@krane/common";
 
 const readFile = promises.readFile;
 

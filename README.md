@@ -50,7 +50,7 @@ jobs:
     name: Deploy to Krane
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/krane@v1
+      - uses: krane/action@v1
         with:
           url: ${{ secrets.KRANE_URL }}
           token: ${{ secrets.KRANE_TOKEN }}
