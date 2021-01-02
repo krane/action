@@ -51,6 +51,9 @@ jobs:
     needs: [build-and-publish-to-docker]
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: my-github-repo
       - uses: krane/action@v1
         with:
           url: ${{ secrets.KRANE_URL }}
