@@ -7,12 +7,12 @@
   "scripts": {
     "build": "tsc",
     "package": "npx ncc build --source-map --license licenses.txt",
-    "prepare": "npm run build && npm run package",
+    "precommit-build": "npm run build && npm run package",
     "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
   },
   "pre-commit": [
     "precommit-msg",
-    "prepare"
+    "precommit-build"
   ],
   "dependencies": {
     "@actions/core": "^1.2.6",
