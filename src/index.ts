@@ -13,18 +13,24 @@ const run = async () => {
     config.scale = 1;
   }
 
-  console.log(`Deploying to Krane instance ${url}`);
-  console.log(` Deployment configuration \n${JSON.stringify(config, null, 2)}`);
+  core.startGroup("Deployment setup");
+  core.info(`Deploying to Krane instance ${url}`);
+  core.info(` Deployment configuration \n${JSON.stringify(config, null, 2)}`);
+  core.endGroup();
 
   const client = new KraneClient(url, token);
 
-  console.log(`Saving ${config.name} configuration`);
+  core.startGroup("Save deployment configuration");
+  core.info(`Saving ${config.name} configuration`);
   await client.saveDeployment(config);
-  console.log(`Configuration for ${config.name} saved succesfully`);
+  core.info(`Configuration for ${config.name} saved succesfully`);
+  core.endGroup();
 
-  console.log(`Triggering new run for ${config.name}`);
+  core.startGroup("Run deployment");
+  core.info(`Triggering new run for ${config.name}`);
   await client.runDeployment(config.name);
-  console.log(`Deployment ${config.name} triggered succesfully`);
+  core.info(`Deployment ${config.name} triggered succesfully`);
+  core.endGroup();
 };
 
 run().catch((error: Error) => core.setFailed(error.message));
