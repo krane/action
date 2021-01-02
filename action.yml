@@ -1,4 +1,4 @@
-name: "Automate Krane deployments"
+name: "Krane"
 description: "Automate Krane deployments"
 author: "Krane"
 inputs:
