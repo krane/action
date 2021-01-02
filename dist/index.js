@@ -22,7 +22,14 @@ const fs_1 = __webpack_require__(5747);
 const readFile = fs_1.promises.readFile;
 const resolveConfig = (path) => __awaiter(void 0, void 0, void 0, function* () {
     const rawConfig = yield readFile(path, "utf8");
-    return JSON.parse(rawConfig);
+    const config = JSON.parse(rawConfig);
+    if (config.tag == null) {
+        config.tag = "latest";
+    }
+    if (config.scale == null) {
+        config.scale = 1;
+    }
+    return config;
 });
 exports.resolveConfig = resolveConfig;
 
@@ -71,20 +78,14 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const token = core.getInput("token");
     const file = core.getInput("file");
     const config = yield config_1.resolveConfig(file);
-    if (config.scale == null) {
-        config.scale = 1;
-    }
-    core.startGroup("Deployment setup");
-    core.info(`Deploying to Krane instance ${url}`);
-    core.info(` Deployment configuration \n${JSON.stringify(config, null, 2)}`);
-    core.endGroup();
+    core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
     const client = new common_1.KraneClient(url, token);
-    core.startGroup("Save deployment configuration");
+    core.startGroup(`Save ${config.name} configuration`);
     core.info(`Saving ${config.name} configuration`);
     yield client.saveDeployment(config);
     core.info(`Configuration for ${config.name} saved succesfully`);
     core.endGroup();
-    core.startGroup("Run deployment");
+    core.startGroup(`Trigger deployment ${config.name}`);
     core.info(`Triggering new run for ${config.name}`);
     yield client.runDeployment(config.name);
     core.info(`Deployment ${config.name} triggered succesfully`);
