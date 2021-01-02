@@ -8,7 +8,7 @@
     "build": "tsc",
     "package": "npx ncc build --source-map --license licenses.txt",
     "precommit-build": "npm run build && npm run package",
-    "precommit-msg": "echo 'Pre-commit checks...' && exit 0"
+    "precommit-msg": "echo 'Pre-commit checks...\nIf new build files are outputted then 'git add' and re-commit.' && exit 0"
   },
   "pre-commit": [
     "precommit-msg",
