@@ -5,17 +5,21 @@
   "author": "David Castaneda",
   "main": "lib/index.js",
   "scripts": {
+    "prepare": "npm run build && npm run package",
     "build": "tsc",
     "package": "npx ncc build --source-map --license licenses.txt"
   },
+  "pre-commit": [
+    "prepare"
+  ],
   "dependencies": {
     "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
     "@krane/common": "^0.3.8"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.26.1",
     "@types/node": "^14.14.19",
+    "@vercel/ncc": "^0.26.1",
+    "pre-commit": "^1.2.2",
     "typescript": "^4.1.3"
   }
 }
