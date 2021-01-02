@@ -71,8 +71,8 @@ const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const token = core.getInput("token");
     const file = core.getInput("file");
     const config = yield config_1.resolveConfig(file);
-    if (config["scale"] == null) {
-        config["scale"] = 1;
+    if (config.scale == null) {
+        config.scale = 1;
     }
     core.startGroup("Deployment setup");
     core.info(`Deploying to Krane instance ${url}`);
