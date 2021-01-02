@@ -48,6 +48,7 @@ jobs:
           tags: latest
   deploy-to-krane:
     name: Deploy to Krane
+    needs: [build-and-publish-to-docker]
     runs-on: ubuntu-latest
     steps:
       - uses: krane/action@v1
