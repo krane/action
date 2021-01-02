@@ -5,5 +5,5 @@ const readFile = promises.readFile;
 
 export const resolveConfig = async (path: string) => {
   const rawConfig = await readFile(path, "utf8");
-  return JSON.parse(rawConfig);
+  return JSON.parse(rawConfig) as Config;
 };
