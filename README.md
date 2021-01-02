@@ -7,11 +7,13 @@ The Krane Github Action allows you to automate deployments using [Krane](https:/
 Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step ideally _auto-deploying_ your apps in that same pipeline.
 
 ```yml
-uses: krane/action@master
-with:
-  url: ${{ secrets.KRANE_URL }}
-  token: ${{ secrets.KRANE_TOKEN }}
-  file: ./deployment.json
+steps:
+  - uses: actions/checkout@v2
+  - uses: krane/action@master
+    with:
+      url: ${{ secrets.KRANE_URL }}
+      token: ${{ secrets.KRANE_TOKEN }}
+      file: ./deployment.json
 ```
 
 | Input | Description                                                                        | Required |
@@ -52,8 +54,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          repository: my-github-repo
       - uses: krane/action@master
         with:
           url: ${{ secrets.KRANE_URL }}

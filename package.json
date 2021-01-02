@@ -1,6 +1,5 @@
 {
   "name": "action",
-  "version": "1.0.2",
   "description": "The Krane github action",
   "author": "David Castaneda",
   "main": "lib/index.js",
