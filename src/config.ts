@@ -5,5 +5,15 @@ const readFile = promises.readFile;
 
 export const resolveConfig = async (path: string) => {
   const rawConfig = await readFile(path, "utf8");
-  return JSON.parse(rawConfig) as Config;
+  const config = JSON.parse(rawConfig) as Config;
+
+  if (config.tag == null) {
+    config.tag = "latest";
+  }
+
+  if (config.scale == null) {
+    config.scale = 1;
+  }
+
+  return config;
 };

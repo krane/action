@@ -9,24 +9,17 @@ const run = async () => {
   const file = core.getInput("file");
 
   const config = await resolveConfig(file);
-  if (config.scale == null) {
-    config.scale = 1;
-  }
-
-  core.startGroup("Deployment setup");
-  core.info(`Deploying to Krane instance ${url}`);
-  core.info(` Deployment configuration \n${JSON.stringify(config, null, 2)}`);
-  core.endGroup();
+  core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
 
   const client = new KraneClient(url, token);
 
-  core.startGroup("Save deployment configuration");
+  core.startGroup(`Save ${config.name} configuration`);
   core.info(`Saving ${config.name} configuration`);
   await client.saveDeployment(config);
   core.info(`Configuration for ${config.name} saved succesfully`);
   core.endGroup();
 
-  core.startGroup("Run deployment");
+  core.startGroup(`Trigger deployment ${config.name}`);
   core.info(`Triggering new run for ${config.name}`);
   await client.runDeployment(config.name);
   core.info(`Deployment ${config.name} triggered succesfully`);
