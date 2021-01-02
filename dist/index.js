@@ -43,23 +43,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-const core_1 = __importDefault(__webpack_require__(2186));
+const core_1 = __webpack_require__(2186);
 const common_1 = __webpack_require__(1639);
 const config_1 = __webpack_require__(88);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    const url = core_1.default.getInput("url");
-    const token = core_1.default.getInput("token");
-    const file = core_1.default.getInput("file");
+    const url = core_1.getInput("url");
+    const token = core_1.getInput("token");
+    const file = core_1.getInput("file");
     const config = yield config_1.resolveConfig(file);
     const client = new common_1.KraneClient(url, token);
     yield client.saveDeployment(config);
     yield client.runDeployment(config.name);
 });
-run().catch((error) => core_1.default.setFailed(error.message));
+run().catch((error) => core_1.setFailed(error.message));
 
 
 /***/ }),
