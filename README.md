@@ -56,3 +56,7 @@ jobs:
           token: ${{ secrets.KRANE_TOKEN }}
           file: ./deployment.json
 ```
+
+## Contributing
+
+This GitHub action is written in TypeScript using the [`@krane/common`](https://github.com/krane/common) library to interact with the Krane API.
