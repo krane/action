@@ -5,11 +5,11 @@ The Krane Github Action allows you to interact with a Krane instance to automate
 Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step ideally being auto-deploying your apps in a true CI/CD fashion... Since GitHub actions lets you control when to trigger an action, you could for example enable this action on merges to master.
 
 ```
-uses: actions/krane-action
+uses: actions/krane
 with:
-    url: 'http://example.com:8500'
-    token: $KRANE_TOKEN
-    configPath: './deployment.json'
+    url: ${{ secrets.KRANE_URL }}
+    token: ${{ secrets.KRANE_TOKEN }}
+    file: ./deployment.json
 ```
 
 ### Inputs
@@ -26,7 +26,7 @@ Token used for authenticated Krane requests
 
 - required: `true`
 
-#### `configPath`
+#### `file`
 
 Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration)
 

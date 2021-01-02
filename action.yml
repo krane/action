@@ -1,5 +1,6 @@
 name: "Automate Krane deployments"
 description: "Automate Krane deployments"
+author: "Krane"
 inputs:
   url:
     description: "Krane base URL, for example http://example.com:8500"
@@ -7,10 +8,13 @@ inputs:
   token:
     description: "Token used for authentication with Krane"
     required: true
-  configPath:
+  file:
     description: "Path to Krane deployment config, defaults to ./deployment.json - https://www.krane.sh/#/deployment-configuration"
     required: false
     default: "./deployment.json"
 runs:
   using: "node12"
   main: "dist/index.js"
+branding:
+  icon: "check-circle"
+  color: "gray-dark"
