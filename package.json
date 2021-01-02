@@ -1,0 +1,17 @@
+{
+  "name": "action",
+  "version": "0.0.1",
+  "description": "The Krane github action",
+  "author": "David Castaneda",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npx ncc build src/index.js --license licenses.txt"
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
+  },
+  "devDependencies": {
+    "@vercel/ncc": "^0.26.1"
+  }
+}
