@@ -1,6 +1,6 @@
 import * as core from "@actions/core";
 
-import { KraneClient } from "@krane/common";
+import { KraneClient, Config } from "@krane/common";
 import { resolveConfig } from "./config";
 
 const run = async () => {
@@ -9,8 +9,8 @@ const run = async () => {
   const file = core.getInput("file");
 
   const config = await resolveConfig(file);
-  if (config.scale == null) {
-    config.scale = 1;
+  if (config["scale"] == null) {
+    config["scale"] = 1;
   }
 
   core.startGroup("Deployment setup");
@@ -22,7 +22,7 @@ const run = async () => {
 
   core.startGroup("Save deployment configuration");
   core.info(`Saving ${config.name} configuration`);
-  await client.saveDeployment(config);
+  await client.saveDeployment(config as Config);
   core.info(`Configuration for ${config.name} saved succesfully`);
   core.endGroup();
 
