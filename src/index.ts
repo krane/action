@@ -10,6 +10,7 @@ const run = async () => {
   const config = await resolveConfig(file);
 
   const client = new KraneClient(url, token);
+
   core.startGroup(`Saving ${config.name} configuration`);
   core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
   await client.saveDeployment(config);
