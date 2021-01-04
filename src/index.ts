@@ -1,8 +1,8 @@
 import * as core from "@actions/core";
 
 import { KraneClient } from "@krane/common";
-import { resolveConfig } from "./config";
 import { KraneAction } from "./action";
+import { resolveConfig } from "./config";
 
 const run = async () => {
   const endpoint = core.getInput("endpoint");
