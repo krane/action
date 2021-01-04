@@ -16,15 +16,16 @@ steps:
       file: ./deployment.json
 ```
 
-| Input    | Description                                                                        | Required |
-| -------- | ---------------------------------------------------------------------------------- | -------- |
-| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                | true     |
-| token    | Token used for authenticated Krane requests                                        | true     |
-| file     | Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration) | true     |
+| Input    | Description                                                                        | Required                 |
+| -------- | ---------------------------------------------------------------------------------- | ------------------------ |
+| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                | true                     |
+| token    | Token used for authenticated Krane requests                                        | true                     |
+| file     | Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration) | true                     |
+| tag      | Image tag to use when triggering new deployment                                    | false (default `latest`) |
 
 ## Complete Example
 
-The following builds and publishes and image to Docker then deploys to Krane.
+The following builds and publishes and image to Docker then triggers a deployment with Krane.
 
 `.github/workflows/deploy.yml`
 
@@ -41,13 +42,21 @@ jobs:
     name: Publish Docker image
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: docker/build-push-action@v1
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker
+        uses: docker/login-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: my-repo/my-image
-          tags: latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: my-repo/my-app:my-tag
+
   deploy-to-krane:
     name: Deploy to Krane
     needs: [build-and-publish-to-docker]

@@ -11,6 +11,10 @@ inputs:
   file:
     description: "Path to Krane deployment configuration - https://www.krane.sh/#/deployment-configuration"
     required: true
+  tag:
+    description: "Image tag to use when triggering new deployment"
+    required: false
+    default: "latest"
 runs:
   using: "node12"
   main: "dist/index.js"

@@ -2,26 +2,20 @@ import * as core from "@actions/core";
 
 import { KraneClient } from "@krane/common";
 import { resolveConfig } from "./config";
+import { KraneAction } from "./action";
 
 const run = async () => {
   const endpoint = core.getInput("endpoint");
   const token = core.getInput("token");
   const file = core.getInput("file");
+
   const config = await resolveConfig(file);
 
   const client = new KraneClient(endpoint, token);
+  const action = new KraneAction(client, config);
 
-  core.startGroup(`Saving ${config.name} configuration`);
-  core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
-  await client.saveDeployment(config);
-  core.info(`Configuration for ${config.name} saved succesfully`);
-  core.endGroup();
-
-  core.startGroup(`Triggering deployment ${config.name}`);
-  core.info(`Triggering new run for ${config.name}`);
-  await client.runDeployment(config.name);
-  core.info(`Deployment ${config.name} triggered succesfully`);
-  core.endGroup();
+  await action.saveDeployment();
+  await action.runDeployment();
 };
 
 run().catch((error: Error) => core.setFailed(error.message));
