@@ -2,7 +2,7 @@
 
 [Marketplace](https://github.com/marketplace/actions/krane)
 
-The Krane Github Action allows you to automate deployments using [Krane](https://krane.sh).
+The Krane Github Action allows you to automate deployments using [Krane](https://krane.sh). You'll be able to continuously deliver updates when changes occur to your projects.
 
 Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step ideally _auto-deploying_ your apps in that same pipeline.
 
