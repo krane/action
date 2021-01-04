@@ -74,11 +74,11 @@ const core = __importStar(__webpack_require__(2186));
 const common_1 = __webpack_require__(1639);
 const config_1 = __webpack_require__(88);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    const url = core.getInput("url");
+    const endpoint = core.getInput("endpoint");
     const token = core.getInput("token");
     const file = core.getInput("file");
     const config = yield config_1.resolveConfig(file);
-    const client = new common_1.KraneClient(url, token);
+    const client = new common_1.KraneClient(endpoint, token);
     core.startGroup(`Saving ${config.name} configuration`);
     core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
     yield client.saveDeployment(config);
