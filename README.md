@@ -11,16 +11,16 @@ steps:
   - uses: actions/checkout@v2
   - uses: krane/action@master
     with:
-      url: ${{ secrets.KRANE_URL }}
+      endpoint: ${{ secrets.KRANE_ENDPOINT }}
       token: ${{ secrets.KRANE_TOKEN }}
       file: ./deployment.json
 ```
 
-| Input | Description                                                                        | Required |
-| ----- | ---------------------------------------------------------------------------------- | -------- |
-| url   | URL of the Krane instance                                                          | true     |
-| token | Token used for authenticated Krane requests                                        | true     |
-| file  | Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration) | true     |
+| Input    | Description                                                                        | Required |
+| -------- | ---------------------------------------------------------------------------------- | -------- |
+| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                | true     |
+| token    | Token used for authenticated Krane requests                                        | true     |
+| file     | Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration) | true     |
 
 ## Complete Example
 
@@ -56,7 +56,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: krane/action@master
         with:
-          url: ${{ secrets.KRANE_URL }}
+          endpoint: ${{ secrets.KRANE_ENDPOINT }}
           token: ${{ secrets.KRANE_TOKEN }}
           file: ./deployment.json
 ```

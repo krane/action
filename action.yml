@@ -2,8 +2,8 @@ name: "Krane"
 description: "Automate Krane deployments"
 author: "Krane"
 inputs:
-  url:
-    description: "URL of the Krane instance, for example http://example.com:8500"
+  endpoint:
+    description: "Endpoint to the Krane instance, for example http://example.com:8500"
     required: true
   token:
     description: "Token used for authenticated Krane requests"

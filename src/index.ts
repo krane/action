@@ -4,12 +4,12 @@ import { KraneClient } from "@krane/common";
 import { resolveConfig } from "./config";
 
 const run = async () => {
-  const url = core.getInput("url");
+  const endpoint = core.getInput("endpoint");
   const token = core.getInput("token");
   const file = core.getInput("file");
   const config = await resolveConfig(file);
 
-  const client = new KraneClient(url, token);
+  const client = new KraneClient(endpoint, token);
 
   core.startGroup(`Saving ${config.name} configuration`);
   core.info(` Deployment configuration:\n${JSON.stringify(config, null, 2)}`);
