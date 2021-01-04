@@ -161,8 +161,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __importStar(__webpack_require__(2186));
 const common_1 = __webpack_require__(1639);
-const config_1 = __webpack_require__(88);
 const action_1 = __webpack_require__(9139);
+const config_1 = __webpack_require__(88);
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
     const endpoint = core.getInput("endpoint");
     const token = core.getInput("token");
