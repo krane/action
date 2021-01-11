@@ -16,12 +16,12 @@ steps:
       file: ./deployment.json
 ```
 
-| Input    | Description                                                                        | Required                 |
-| -------- | ---------------------------------------------------------------------------------- | ------------------------ |
-| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                | true                     |
-| token    | Token used for authenticated Krane requests                                        | true                     |
-| file     | Path to Krane [deployment config](https://www.krane.sh/#/deployment-configuration) | true                     |
-| tag      | Image tag to use when triggering new deployment                                    | false (default `latest`) |
+| Input    | Description                                                                             | Required                 |
+| -------- | --------------------------------------------------------------------------------------- | ------------------------ |
+| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                     | true                     |
+| token    | Token used for authenticated Krane requests                                             | true                     |
+| file     | Path to Krane [deployment config](https://www.krane.sh/#/docs/deployment-configuration) | true                     |
+| tag      | Image tag to use when triggering new deployment                                         | false (default `latest`) |
 
 ## Complete Example
 
