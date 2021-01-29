@@ -72,4 +72,4 @@ jobs:
 
 ## Contributing
 
-This GitHub action is written in TypeScript using the [`@krane/common`](https://github.com/krane/common) library to interact with the Krane API.
+This GitHub action is written in Typescript using the [`@krane/common`](https://github.com/krane/common) library to interface with the Krane API.
