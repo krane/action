@@ -1,10 +1,10 @@
-![Action](https://user-images.githubusercontent.com/21694364/103450363-49f2ae80-4c83-11eb-82a9-7fcbb8a2f4d0.png)
+<img src="https://github.com/krane/krane/blob/main/docs/assets/krane-wordmark.png?raw=true" width="350">
+
+> The [Krane](https://krane.sh) Github Action to continuously deploy changes.
 
 [Marketplace](https://github.com/marketplace/actions/krane)
 
-The Krane Github Action helps you continuously deploy chanegs using your existing workflow with [Krane](https://krane.sh)
-
-Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step deploying your changes. Below is an example setting up the Krane Github Action.
+Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step deploying your changes to a target environment or machine. Below is an example setting up the Krane Github Action. 
 
 ```yml
 on:
@@ -26,7 +26,7 @@ jobs:
 
 | Input    | Description                                                                              | Required                 |
 | -------- | ---------------------------------------------------------------------------------------  | ------------------------ |
-| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                      | true                     |
+| endpoint | Endpoint to the Krane instance, for example https://krane.example.com                    | true                     |
 | token    | Token used for authenticated Krane requests                                              | true                     |
 | file     | Path to Krane [deployment config](https://docs.krane.sh/#/docs/deployment)               | true                     |
 | tag      | Image tag to use when triggering new deployment                                          | false (default `latest`) |
