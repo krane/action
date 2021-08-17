@@ -2,26 +2,34 @@
 
 [Marketplace](https://github.com/marketplace/actions/krane)
 
-The Krane Github Action allows you to automate deployments using [Krane](https://krane.sh). You'll be able to continuously deliver updates when changes occur to your projects.
+The Krane Github Action helps you continuously deploy chanegs using your existing workflow with [Krane](https://krane.sh)
 
-Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step ideally _auto-deploying_ your apps in that same pipeline.
+Typically in your pipelines you'll have a _build image_ step and a _push image_ step. The last step deploying your changes. Below is an example setting up the Krane Github Action.
 
 ```yml
-steps:
-  - uses: actions/checkout@v2
-  - uses: krane/action@master
-    with:
-      endpoint: ${{ secrets.KRANE_ENDPOINT }}
-      token: ${{ secrets.KRANE_TOKEN }}
-      file: ./deployment.json
+on:
+  push:
+    branches:
+      - main
+jobs:
+  deploy-to-krane:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: krane/action@master
+        with:
+          endpoint: https://krane.example.com
+          token: ${{ secrets.KRANE_TOKEN }}
+          file: ./deployment.json
+          tag: latest
 ```
 
-| Input    | Description                                                                             | Required                 |
-| -------- | --------------------------------------------------------------------------------------- | ------------------------ |
-| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                     | true                     |
-| token    | Token used for authenticated Krane requests                                             | true                     |
-| file     | Path to Krane [deployment config](https://www.krane.sh/#/docs/deployment)               | true                     |
-| tag      | Image tag to use when triggering new deployment                                         | false (default `latest`) |
+| Input    | Description                                                                              | Required                 |
+| -------- | ---------------------------------------------------------------------------------------  | ------------------------ |
+| endpoint | Endpoint to the Krane instance, for example http://example.com:8500                      | true                     |
+| token    | Token used for authenticated Krane requests                                              | true                     |
+| file     | Path to Krane [deployment config](https://docs.krane.sh/#/docs/deployment)               | true                     |
+| tag      | Image tag to use when triggering new deployment                                          | false (default `latest`) |
 
 ## Complete Example
 
@@ -35,7 +43,7 @@ name: deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   build-and-publish-to-docker:
