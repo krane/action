@@ -1,6 +1,6 @@
 <img src="https://github.com/krane/krane/blob/main/docs/assets/krane-wordmark.png?raw=true" width="350">
 
-> The [Krane](https://github.com/krane/krane) Github Action to continuously deploy changes.
+> The [Krane](https://github.com/krane/krane) Github Action to continuously deploy changes
 
 [Marketplace](https://github.com/marketplace/actions/krane)
 
